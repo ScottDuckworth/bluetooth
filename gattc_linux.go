@@ -217,12 +217,20 @@ func (s DeviceService) DiscoverCharacteristics(uuids []UUID) ([]DeviceCharacteri
 	return chars, nil
 }
 
+func (c DeviceCharacteristic) Write(p []byte) (n int, err error) {
+	err = c.characteristic.Call("org.bluez.GattCharacteristic1.WriteValue", 0, p, map[string]dbus.Variant{"type": dbus.MakeVariant("request")}).Err
+	if err != nil {
+		return 0, err
+	}
+	return len(p), nil
+}
+
 // WriteWithoutResponse replaces the characteristic value with a new value. The
 // call will return before all data has been written. A limited number of such
 // writes can be in flight at any given time. This call is also known as a
 // "write command" (as opposed to a write request).
 func (c DeviceCharacteristic) WriteWithoutResponse(p []byte) (n int, err error) {
-	err = c.characteristic.Call("org.bluez.GattCharacteristic1.WriteValue", 0, p, map[string]dbus.Variant(nil)).Err
+	err = c.characteristic.Call("org.bluez.GattCharacteristic1.WriteValue", 0, p, map[string]dbus.Variant{"type": dbus.MakeVariant("command")}).Err
 	if err != nil {
 		return 0, err
 	}
