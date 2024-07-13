@@ -1,7 +1,7 @@
 package main
 
 import (
-	"tinygo.org/x/bluetooth"
+	"github.com/ScottDuckworth/bluetooth"
 )
 
 var adapter = bluetooth.DefaultAdapter

@@ -5,7 +5,7 @@ import (
 	"image/color"
 	"time"
 
-	"tinygo.org/x/bluetooth"
+	"github.com/ScottDuckworth/bluetooth"
 	"tinygo.org/x/tinyterm"
 )
 

@@ -12,7 +12,7 @@ package main
 import (
 	"time"
 
-	"tinygo.org/x/bluetooth"
+	"github.com/ScottDuckworth/bluetooth"
 )
 
 var (
